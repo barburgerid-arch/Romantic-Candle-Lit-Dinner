@@ -205,6 +205,7 @@
 
         input[type="text"],
         input[type="tel"],
+        input[type="date"],
         select,
         textarea {
             width: 100%;
@@ -305,7 +306,6 @@
 
 <div class="main-container">
 
-    <!-- KOLOM KIRI: DESKRIPSI -->
     <div class="info-column">
         <h3>Menu Package</h3>
         <h2>PAKET ROMANSA 2 PRIME / Rp. 375.000,- + PPN 10%</h2>
@@ -340,7 +340,7 @@
         <div class="divider"></div>
         
         <p><b>Untuk melihat foto/video suasana Room & dekorasi, silakan kunjungi link berikut:<br>
-        <a href="https://barapigrill.com/romantic-candlelit-dinner-di-barapi-sister-brand-barburger/" target="_blank">Kunjungi Link Barapi Grill</a></b></p>
+        <a href="https://barapigrill.com/romantic-candlelit-dinner-di-barapi-sister-brand-barburger/" target="_blank">Kunjungi Link website Barapi Meat & Grill</a></b></p>
         
         <div class="divider"></div>
 
@@ -357,15 +357,14 @@
         <ul class="info-list">
             <li>Tidak melayani reservasi mendadak (pada hari yang sama).</li>
             <li>Reservasi/Booking paling lambat 4 hari sebelum hari H.</li>
-            <li>Harap melakukan pembayaran LUNAS 100% paling lambat 3 hari sebelum hari H (Non-Refundable).</li>
+          <li>Harap melakukan pembayaran <b>LUNAS</b> 100% paling lambat 3 hari sebelum hari H (Non-Refundable).</li>
             <li>Transfer ke rekening <b>BCA 2293025045 an PT Mahawirya Makmur Sentosa.</b></li>
             <li>Perubahan tanggal (reschedule) minimal H-1 & dikenakan biaya Rp.50.000,-</li>
-            <li>Belum dibayar hingga H-2 otomatis HANGUS.</li><br>
+          <li>Belum dibayar hingga H-2 otomatis <b>HANGUS</b>.</li><br>
         </ul>
 
         <div class="divider"></div>
 
-        <!-- KOTAK CEKLIS PERSETUJUAN -->
         <div class="agreement-container">
             <label class="checkbox-label">
                 <input type="checkbox" id="agreeCheckbox">
@@ -374,7 +373,6 @@
         </div>
     </div>
 
-    <!-- KOLOM KANAN: FORMULIR -->
     <div class="whatsform-card">
         <div class="banner-image"></div>
 
@@ -449,6 +447,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="date">Reservation Date (Tanggal Kedatangan) *</label>
+                    <p class="instruction">Sesuai ketentuan, mohon pilih tanggal minimal 4 hari sebelum hari H.</p>
+                    <input type="date" id="date" required>
+                </div>
+
+                <div class="form-group">
                     <label for="batch">Batch Option (slot jam kedatangan) *</label>
                     <select id="batch" required>
                         <option value="">-- Pilih Jam Kedatangan --</option>
@@ -506,6 +510,7 @@
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const packageOpt = document.getElementById('package').value;
+        const date = document.getElementById('date').value; // Ambil nilai tanggal
         const batch = document.getElementById('batch').value;
         const platingText = document.getElementById('platingText').value || '-';
         const additional = document.getElementById('additional').value || '-';
@@ -521,6 +526,7 @@
                    `*Pilihan Paket:*%0A${encodeURIComponent(packageOpt)}%0A%0A` +
                    `*Pilihan Lokasi:*%0A${encodeURIComponent(venue)}%0A%0A` +
                    `*Tipe Ruangan:* ${encodeURIComponent(roomType)}%0A` +
+                   `*Tanggal Kedatangan:* ${encodeURIComponent(date)}%0A` + /* Ditambahkan ke WA */
                    `*Slot Jam:* ${encodeURIComponent(batch)}%0A%0A` +
                    `*Request Tulisan Piring:*%0A${encodeURIComponent(platingText)}%0A%0A` +
                    `*Request Tambahan:*%0A${encodeURIComponent(additional)}`;
@@ -533,6 +539,7 @@
         formData.append("packageOpt", packageOpt);
         formData.append("venue", venue);
         formData.append("roomType", roomType);
+        formData.append("date", date); // Ditambahkan ke Google Sheets
         formData.append("batch", batch);
         formData.append("platingText", platingText);
         formData.append("additional", additional);
